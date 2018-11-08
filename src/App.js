@@ -14,18 +14,25 @@ class App extends Component {
       { id: 5, value: 0 }
     ]
   };
+  //called once, when instance of class is created,
+  //called before the component is mounted
   constructor(props) {
+    //calling super(props) so that to define this.props
     super(props);
-    //called once, when instance of class is created
     console.log("App-constructor", this.props);
     // this.state=this.props.something
   }
+
+  //called before render(),
   static getDerivedStateFromProps(nextProps, prevState) {
     console.log("getDerivedStateFromProps from Child");
+    //prints the next properties for the components
     console.log(nextProps);
+    //prints the previous state for the components(child)
     console.log(prevState);
     return null;
   }
+  //called ater the render of the component
   componentDidMount() {
     console.log("App-mounted");
   }
@@ -57,13 +64,20 @@ class App extends Component {
     return (
       <React.Fragment>
         <Navbar
+          // inicialize variable only with the values from counters array,
+          // if the length of the array is more than 0
           totalCounters={this.state.counters.filter(c => c.value > 0).length}
         />
         <main className="container">
           <Counters
+            //setting the list of counter from thae state
             counters={this.state.counters}
+            //matching the event onReset with handleReset
+            //will be catched by a child component
             onRest={this.handleReset}
+            //matching the event onincrement with handleIncrement
             onIncrement={this.handleIncrement}
+            //matching the event onDelete with handleDelete
             onDelete={this.handleDelete}
           />
         </main>
