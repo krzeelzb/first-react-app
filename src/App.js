@@ -38,24 +38,37 @@ class App extends Component {
   }
 
   handleIncrement = counter => {
+    //prints the value of counter
     console.log(counter);
-    const counters = [...this.state.counters]; //clone
+    //cloning the elements from counters array from state to new const
+    const counters = [...this.state.counters];
+    //setting the new const index to to index value of the counter in the counters list
     const index = counters.indexOf(counter);
+    // setting the counter value at the index position in  counters array
     counters[index] = { ...counter };
+    //incrementing the element of particular element of counters array
     counters[index].value++;
-    console.log(this.state.counters[index]);
+    //setting the new state of counters,overwriting
     this.setState({ counters });
   };
   handleReset = () => {
+    //new  const counter maping the all elemnents c to 0
     const counters = this.state.counters.map(c => {
+      //setting the value to 0
       c.value = 0;
+      //returning the c with the new value 0
       return c;
     });
+    //setting the new state of counters,overwriting
     this.setState({ counters });
   };
   handleDelete = counterId => {
+    //prints which element we want to delete
     console.log("Event Handler Called", this.counterId);
+    //new const, with filtered values from counter array,
+    //with elements that are not equle to counterId,alll counters except counterId
     const counters = this.state.counters.filter(c => c.id !== counterId);
+    //setting the new state of counters,overwriting
     this.setState({ counters: counters });
   };
 
